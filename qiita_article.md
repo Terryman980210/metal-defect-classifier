@@ -250,6 +250,8 @@ Step 3【発展】ConvNeXt V2-Base + GradCAM++
 コードはGitHubで公開しています：
 👉 **[https://github.com/Terryman980210/metal-defect-classifier](https://github.com/Terryman980210/metal-defect-classifier)**
 
+> この記事とリポジトリの実装・整備には、Anthropic の [Claude Code](https://claude.com/claude-code) の力を借りて作成しました。
+
 ---
 
 ## 参考文献
