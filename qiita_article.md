@@ -59,12 +59,12 @@ Swin TransformerはAttention Mapが自然に可視化できるため、「どこ
 
 コードは以下のGitHubリポジトリで公開しています。
 
-👉 **[https://github.com/YOUR_USERNAME/metal-defect-classifier](https://github.com/YOUR_USERNAME/metal-defect-classifier)**
+👉 **[https://github.com/Terryman980210/metal-defect-classifier](https://github.com/Terryman980210/metal-defect-classifier)**
 
 ### セットアップ
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/metal-defect-classifier.git
+git clone https://github.com/Terryman980210/metal-defect-classifier.git
 cd metal-defect-classifier
 pip install -r requirements.txt
 ```
@@ -217,7 +217,7 @@ Step 3【発展】ConvNeXt V2-Base + GradCAM++
 - Swin TransformerのAttention Mapは説明可能性の問題を自然に解決
 
 コードはGitHubで公開しています：
-👉 **[https://github.com/YOUR_USERNAME/metal-defect-classifier](https://github.com/YOUR_USERNAME/metal-defect-classifier)**
+👉 **[https://github.com/Terryman980210/metal-defect-classifier](https://github.com/Terryman980210/metal-defect-classifier)**
 
 ---
 

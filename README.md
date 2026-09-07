@@ -77,7 +77,7 @@ your_dataset/
 
 ```bash
 # リポジトリのクローン
-git clone https://github.com/YOUR_USERNAME/metal-defect-classifier.git
+git clone https://github.com/Terryman980210/metal-defect-classifier.git
 cd metal-defect-classifier
 
 # 依存パッケージのインストール（CUDA環境推奨）
