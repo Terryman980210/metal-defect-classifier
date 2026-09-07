@@ -1,4 +1,18 @@
-# 【2026年最新】金属表面欠陥分類CNNの選び方と実装 〜VGGからSwin Transformerへ〜
+---
+title: 【2026年最新】金属表面欠陥分類CNNの選び方と実装 〜VGGからSwin Transformerへ〜
+tags:
+  - Python
+  - 機械学習
+  - DeepLearning
+  - PyTorch
+  - 画像認識
+private: false
+updated_at: ''
+id: null
+organization_url_name: null
+slide: false
+ignorePublish: false
+---
 
 ## はじめに
 
@@ -69,6 +83,19 @@ cd metal-defect-classifier
 pip install -r requirements.txt
 ```
 
+主な依存バージョン（`requirements.txt`）：
+
+| パッケージ | バージョン |
+|---|---|
+| torch | >=2.1.0 |
+| torchvision | >=0.16.0 |
+| timm | >=0.9.12 |
+| grad-cam | >=1.4.8 |
+| scikit-learn | >=1.3.0 |
+
+> CUDA環境では、`requirements.txt` を入れる前に環境に合った PyTorch（CUDA版）を[公式手順](https://pytorch.org/get-started/locally/)で先にインストールしてください。
+> なお、このリポジトリにはデータセットと学習済み重みは含まれません。手元の欠陥画像を下記の構成で用意してください。
+
 ### データセット構成
 
 ```
@@ -93,10 +120,13 @@ transforms.RandomHorizontalFlip(),
 transforms.RandomVerticalFlip(),
 transforms.RandomRotation(15),
 transforms.ColorJitter(brightness=0.2, contrast=0.2),
+transforms.RandomAffine(degrees=0, translate=(0.05, 0.05)),
 transforms.ToTensor(),
 transforms.Normalize(mean=[0.485, 0.456, 0.406],
                      std=[0.229, 0.224, 0.225]),
 ```
+
+> 検証・テスト時は反転や回転などのランダム拡張を外し、リサイズ＋正規化のみを適用します（`dataset.py` の `build_transforms(is_train=False)`）。
 
 ### モデルの定義（timmを使用）
 
@@ -143,10 +173,11 @@ python src/train.py \
 
 学習の主なポイントです。
 
-- **AdamW + CosineAnnealingLR** でTransformerを安定学習
+- **AdamW + CosineAnnealingLR（T_max=epochs, eta_min=1e-6）** でTransformerを安定学習
 - **label_smoothing=0.1** で過学習を抑制
-- **WeightedRandomSampler** でクラス不均衡に対応
-- **Early Stopping（patience=15）** で最良モデルを自動保存
+- **WeightedRandomSampler** でクラス不均衡に対応（各クラスをほぼ等確率でサンプリング）
+- **勾配クリッピング（clip_grad_norm, max_norm=1.0）** でTransformer学習初期の発散を防止
+- **Early Stopping（patience=15, val_lossを監視）** で最良モデルを自動保存
 - **AMP（自動混合精度）** でRTX4090のTensorCoreを活用
 
 ### XAI可視化
