@@ -1,0 +1,12 @@
+# CoAtNet-2 - CNN + Transformer hybrid
+model:       coatnet_2
+num_classes: 20
+img_size:    256
+batch_size:  32
+epochs:      100
+lr:          1.0e-4
+weight_decay: 1.0e-4
+patience:    15
+amp:         true
+num_workers: 4
+seed:        42
